@@ -38,6 +38,11 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyByte);
     }
 
+    /**
+     * Genera un token JWT con los datos del usuario
+     * @param users
+     * @return
+     */
     public String generatedToken(Users users){
         Date now = new Date();
         Date expirationDate = new Date(System.currentTimeMillis() + expiration);
@@ -51,6 +56,11 @@ public class JwtService {
                 .compact();
     }
 
+    /**
+     * Valida que el token sea válido
+     * @param token
+     * @return
+     */
     public Boolean validToken(String token){
         try {
             Jwts.parser().verifyWith(getSigninKey()).build().parseSignedClaims(token);
@@ -64,6 +74,15 @@ public class JwtService {
         }
     }
 
+    /**
+     * Extrae cualquier claim del token usando una función resolver
+     * 
+     * 
+     * @param <T>
+     * @param token
+     * @param resolver
+     * @return
+     */
     public <T> T extractClaims(String token, Function<Claims, T> resolver){
         final Claims claims = Jwts.parser().verifyWith(getSigninKey()).build().parseSignedClaims(token).getPayload();
         return resolver.apply(claims);
@@ -84,6 +103,13 @@ public class JwtService {
         return extractClaims(token, claims -> claims.get("role", String.class));
     }
 
+    /**
+     * Refresca el token JWT, generando uno nuevo con la misma información pero nueva fecha de expiración
+     * 
+     * @param token
+     * @return
+     * @throws Exception
+     */
     public String refreshToken(String token) throws Exception{
         Claims claims;
         try {

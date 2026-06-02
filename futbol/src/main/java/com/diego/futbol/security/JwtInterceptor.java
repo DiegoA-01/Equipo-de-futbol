@@ -19,6 +19,9 @@ public class JwtInterceptor implements HandlerInterceptor {
     
     private final JwtFilter jwtFilter;
 
+    /**
+     * Este método se ejecuta antes de que el controlador maneje la petición.
+     */
     @Override
     public boolean preHandle(
             HttpServletRequest request,
@@ -71,6 +74,13 @@ public class JwtInterceptor implements HandlerInterceptor {
         return true;
     }
 
+    /**
+     * Envía una respuesta JSON con error 401 No autorizado
+     * 
+     * @param response
+     * @param message
+     * @throws IOException
+     */
     private void sendUnauthorizedResponse(HttpServletResponse response, String message) throws IOException {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json;charset=UTF-8");
@@ -83,6 +93,13 @@ public class JwtInterceptor implements HandlerInterceptor {
         response.getWriter().write(jsonResponse);
     }
 
+    /**
+     * Envía una respuesta JSON con error 403 Acceso denegado
+     * 
+     * @param response
+     * @param message
+     * @throws IOException
+     */
     private void sendForbiddenResponse(HttpServletResponse response, String message) throws IOException {
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         response.setContentType("application/json;charset=UTF-8");
