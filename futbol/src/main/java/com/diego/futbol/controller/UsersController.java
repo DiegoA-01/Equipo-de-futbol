@@ -82,6 +82,11 @@ public class UsersController {
         Long authenticatedUserId = (Long) request.getAttribute("authenticatedUserId");
         String authenticatedRole = (String) request.getAttribute("authenticatedRole");
         
+        /**
+         * Si el rol es PLAYER y el ID del usuario autenticado no coincide con el ID solicitado, se deniega el acceso
+          * Esto asegura que un PLAYER solo pueda ver su propio perfil
+          * Mientras que un COACH puede ver cualquier perfil sin restricciones
+         */
         if (authenticatedRole.equals(Rol.PLAYER.name()) && !userId.equals(authenticatedUserId)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
                 ApiResponse.<UsersResponseDTO>builder()
@@ -113,6 +118,10 @@ public class UsersController {
             HttpServletRequest httpRequest){
         
         // Validación de permisos
+        /**
+         * Si el rol es PLAYER y el ID del usuario autenticado no coincide con el ID solicitado, se deniega el acceso
+         * Esto asegura que un PLAYER solo pueda actualizar su propio perfil
+         */
         Long authenticatedUserId = (Long) httpRequest.getAttribute("authenticatedUserId");
         String authenticatedRole = (String) httpRequest.getAttribute("authenticatedRole");
         

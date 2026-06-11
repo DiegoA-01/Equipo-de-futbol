@@ -3,7 +3,7 @@ spring:
     name: futbol
 
   datasource:
-    url: jdbc:mysql://localhost:3306/football_training
+    url: jdbc:mysql://host.docker.internal:3306/football_training
     username: root
     password: Di1004960034.
     driver-class-name: com.mysql.cj.jdbc.Driver
