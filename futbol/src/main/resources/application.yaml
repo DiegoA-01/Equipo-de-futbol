@@ -1,11 +1,44 @@
+# spring:
+#   application:
+#     name: futbol
+
+
+#   datasource:
+#     url: jdbc:mysql://host.docker.internal:3306/football_training
+#     username: root
+#     password: Di1004960034.
+#     driver-class-name: com.mysql.cj.jdbc.Driver
+
+#   jpa:
+#     hibernate:
+#       ddl-auto: update
+#     show-sql: true
+#     properties:
+#       hibernate:
+#       "[format_sql]": true
+
+# server:
+#   port: ${PORT:8080}
+#   servlet:
+#     context-path: /api/v1
+
+# logging:
+#   level:
+#     "[org.springframework]":  INFO
+
+# security:
+#   jwt:
+#     secret-key: mWOWGtEqOGvHmU2F3ri/Zsmt4/Q3yTnDeZG7+diVu3B19hK/dpfafFI/V65TGlECtCuzJ579QYBZu0K4ZaQMew==
+#     token-expiration: 6000000
+
 spring:
   application:
     name: futbol
 
   datasource:
-    url: jdbc:mysql://host.docker.internal:3306/football_training
+    url: jdbc:mysql://acela.proxy.rlwy.net:57814/railway?useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: Di1004960034.
+    password: EkziLeoojLUolfVItWzZSRUFLIOBGEMz
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -17,13 +50,13 @@ spring:
       "[format_sql]": true
 
 server:
-  port: 8080
+  port: ${PORT:8080}
   servlet:
     context-path: /api/v1
 
 logging:
   level:
-    "[org.springframework]":  INFO
+    "[org.springframework]": INFO
 
 security:
   jwt:

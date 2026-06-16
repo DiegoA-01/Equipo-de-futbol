@@ -2,7 +2,7 @@ package com.diego.futbol.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.diego.futbol.dto.Request.TrainingsRequestDTO;
@@ -17,8 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TrainingsService {
     
-    @Autowired
-    TrainingsRepository trainingsRepository;
+    public final TrainingsRepository trainingsRepository;
 
     /**
      * Crear entrnamiento
