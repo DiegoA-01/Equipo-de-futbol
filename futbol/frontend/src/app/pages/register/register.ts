@@ -43,6 +43,7 @@ export class Register {
 
     this.loading = true;
     this.errorMessage = '';
+    this.successMessage = '';
 
     this.authService.register({
       name: this.name,
@@ -58,7 +59,19 @@ export class Register {
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = err.error?.message || 'Error al registrarse. Intenta de nuevo.';
+
+        const mensaje = err.error?.mensaje || err.error?.message || '';
+
+        if (mensaje.includes('phone') || mensaje.includes('Duplicate')) {
+          this.errorMessage = 'El teléfono ya está registrado, usa otro.';
+        } else if (mensaje.includes('email') || mensaje.includes('correo')) {
+          this.errorMessage = 'El correo ya está registrado, usa otro.';
+        } else if (mensaje) {
+          this.errorMessage = mensaje;
+        } else {
+          this.errorMessage = 'Error al registrarse. Intenta de nuevo.';
+        }
+
         console.error('Error registro:', err);
       }
     });

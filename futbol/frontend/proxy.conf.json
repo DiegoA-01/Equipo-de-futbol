@@ -1,5 +1,5 @@
 {
-  "/api": {
+  "/api/v1": {
     "target": "https://futbol-app-latest.onrender.com",
     "secure": true,
     "changeOrigin": true,
